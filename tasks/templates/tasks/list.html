@@ -1,0 +1,109 @@
+<link rel="stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<style>
+    body{
+        background-color: skyblue;
+    }
+
+    input{
+        width: 100%;
+        padding:12px 20px ;
+        margin: 8px 0;
+        box-sizing: border-box;
+    }
+
+    input::placeholder{
+        color: paleturquoise;
+    }
+
+    .submit{
+        background-color:slateblue;
+        
+
+    }
+
+    .center-column{
+        width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: whitesmoke;
+        border-radius: 3px;
+        box-shadow: 6ox 2px 30px 0px rgba(0, 0, 0, 0.75);
+    }
+ 
+    .item-row{
+        background-color: rgb(122, 144, 211);
+        margin: 10px;
+        padding: 20px;
+        border-radius: 3px;
+        color: #fff;
+        font-size: 16px;
+        box-shadow: 0px -1px 10px -4px rgba(0, 0, 0, 0.75);
+    }
+
+    .btn-danger{
+        background-color: #ffae19;
+        border-color: #a59400;
+        padding: 15px 32px;
+        display: inline-block;
+        text-align: center;
+        font-size: 16px;
+        border-radius: 4px;
+        transition-duration: 0.4s;
+
+    }
+    .btn-info{
+        background-color: peachpuff;
+        border-color:palegoldenrod;
+        padding: 15px 32px;
+        display: inline-block;
+        text-align: center;
+        font-size: 16px;
+        border-radius: 4px;
+        transition-duration: 0.4s;
+
+    }
+
+    .btn-dark{
+        background-color: plum;
+        border-color:palegoldenrod;
+        padding: 15px 32px;
+        display: inline-block;
+        text-align: center;
+        font-size: 16px;
+        border-radius: 4px;
+        transition-duration: 0.4s;
+
+    }
+
+    .button:hover {
+  background-color: #ffae19; /* Green */
+  color: white;
+}
+
+</style>
+
+<div class = "center-column">
+    <form method= "POST" action="/">
+        {% csrf_token %}
+        {{form.title}}
+        <input class="btn btn-dark" type ="submit"  name= "Create Task">
+    </form>
+
+    <div class ="todo-list">
+    {% for task in tasks %}
+        <div class ='item-row'>
+            <a  class="btn btn-sm btn-info" href= "{% url 'update' task.id %}">Update</a>
+            <a class="btn btn-sm btn-danger" href= "{% url 'delete' task.id %}">Delete</a>
+
+            {% if task.complete == True %}
+            <strike>{{task}}</strike>
+            {% else %}
+            <span>{{task}}</span>
+            {% endif %}
+        </div>
+
+
+    {% endfor %}
+    </div>
+</div>
